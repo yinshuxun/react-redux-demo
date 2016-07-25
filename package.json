@@ -22,6 +22,8 @@
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0",
-    "react-router": "^2.5.2"
+    "react-router": "^2.5.2",
+    "react-router-redux": "^4.0.5",
+    "fbjs": "^0.8.3"
   }
 }
