@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router,Route,hashHistory,IndexRedirect,browserHistory} from 'react-router';
 import Form from './components/form';
-import Home from './components/home';
+import Home from './components/reduxHome_1st';
 import Logout from './components/lgOut';
 
 ReactDOM.render(
