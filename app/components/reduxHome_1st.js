@@ -1,47 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router';
-import {createStore} from "redux";
+import ItemStore from '../stores/itemStores';
+import itemAction from '../actions/itemAction'
 
 let testData = [{id: 1, name: "a"}, {id: 2, name: "b"}, {id: 3, name: "c"}];
 
-// action creator
-let actions = {
-    delete: item=>({
-        type: 'del_item',
-        id: item.id
-    }),
-    add: item=>({
-        type: 'add_item',
-        name: item.name,
-    })
-};
-
-// reducers
-let itemReducer = function (state, action) {
-    if (typeof state === 'undefined') {
-        return [];
-    }
-    switch (action.type) {
-        case 'add_item':
-            return state.slice(0).concat({
-                name: action.name || "default",
-                completed: false
-            });
-            break;
-        case 'del_item':
-            state.splice(action.id, 1);
-            return state;
-            break;
-        default:
-            return state;
-    }
-};
-
-let store = createStore(itemReducer);
-
 let Item = React.createClass({
     click(){
-        store.dispatch(actions.delete({id: this.props.id}))
+        ItemStore.dispatch(itemAction.delete({id: this.props.id}))
     },
     render(){
         return (
@@ -60,14 +26,14 @@ let Item = React.createClass({
 let ItemList = React.createClass({
     getInitialState(){
         return {
-            list: store.getState()
+            list: ItemStore.getState()
         }
     },
     componentDidMount(){
-        var unsubscribe = store.subscribe(this.onChange);
+        var unsubscribe = ItemStore.subscribe(this.onChange);
     },
     onChange(){
-        this.setState({list: store.getState()})
+        this.setState({list: ItemStore.getState()})
     },
     render(){
         return (
@@ -82,7 +48,13 @@ let ItemList = React.createClass({
 
 let ItemNotic = React.createClass({
     getInitialState(){
-        return {list: store.getState().length}
+        return {list: ItemStore.getState()}
+    },
+    componentDidMount(){
+        var unsubscribe = ItemStore.subscribe(this.onChange)
+    },
+    onChange(){
+        this.setState({list: ItemStore.getState()})
     },
     render(){
         return (
@@ -94,11 +66,11 @@ let ItemNotic = React.createClass({
 let AddItem = React.createClass({
     getInitialState(){
         return {
-            list: store.getState()
+            list: ItemStore.getState()
         }
     },
     add(){
-        store.dispatch(actions.add({name: this.refs.input.value}));
+        ItemStore.dispatch(itemAction.add({name: this.refs.input.value}));
     },
     render(){
         return (

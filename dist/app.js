@@ -18,7 +18,7 @@ webpackJsonp([0],[
 
 	var _form2 = _interopRequireDefault(_form);
 
-	var _reduxHome_1st = __webpack_require__(261);
+	var _reduxHome_1st = __webpack_require__(236);
 
 	var _reduxHome_1st2 = _interopRequireDefault(_reduxHome_1st);
 
@@ -22913,7 +22913,225 @@ webpackJsonp([0],[
 	exports.default = From;
 
 /***/ },
-/* 236 */,
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(172);
+
+	var _itemStores = __webpack_require__(238);
+
+	var _itemStores2 = _interopRequireDefault(_itemStores);
+
+	var _itemAction = __webpack_require__(253);
+
+	var _itemAction2 = _interopRequireDefault(_itemAction);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var testData = [{ id: 1, name: "a" }, { id: 2, name: "b" }, { id: 3, name: "c" }];
+
+	var Item = _react2.default.createClass({
+	    displayName: 'Item',
+	    click: function click() {
+	        _itemStores2.default.dispatch(_itemAction2.default.delete({ id: this.props.id }));
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'tr',
+	            { key: this.props.id },
+	            _react2.default.createElement(
+	                'td',
+	                null,
+	                this.props.id
+	            ),
+	            _react2.default.createElement(
+	                'td',
+	                null,
+	                this.props.name
+	            ),
+	            _react2.default.createElement(
+	                'td',
+	                null,
+	                _react2.default.createElement(
+	                    'button',
+	                    { onClick: this.click },
+	                    '删除'
+	                )
+	            )
+	        );
+	    }
+	});
+
+	var ItemList = _react2.default.createClass({
+	    displayName: 'ItemList',
+	    getInitialState: function getInitialState() {
+	        return {
+	            list: _itemStores2.default.getState()
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var unsubscribe = _itemStores2.default.subscribe(this.onChange);
+	    },
+	    onChange: function onChange() {
+	        this.setState({ list: _itemStores2.default.getState() });
+	    },
+	    render: function render() {
+	        var _this = this;
+
+	        return _react2.default.createElement(
+	            'tbody',
+	            null,
+	            this.state.list.map(function (item, index) {
+	                return _react2.default.createElement(Item, { name: item.name, id: index, key: index, list: _this.state.list });
+	            })
+	        );
+	    }
+	});
+
+	var ItemNotic = _react2.default.createClass({
+	    displayName: 'ItemNotic',
+	    getInitialState: function getInitialState() {
+	        return { list: _itemStores2.default.getState() };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var unsubscribe = _itemStores2.default.subscribe(this.onChange);
+	    },
+	    onChange: function onChange() {
+	        this.setState({ list: _itemStores2.default.getState() });
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'h4',
+	            null,
+	            '当前选择的数量为:',
+	            _react2.default.createElement(
+	                'span',
+	                null,
+	                this.state.list.length
+	            )
+	        );
+	    }
+	});
+
+	var AddItem = _react2.default.createClass({
+	    displayName: 'AddItem',
+	    getInitialState: function getInitialState() {
+	        return {
+	            list: _itemStores2.default.getState()
+	        };
+	    },
+	    add: function add() {
+	        _itemStores2.default.dispatch(_itemAction2.default.add({ name: this.refs.input.value }));
+	    },
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('input', { ref: 'input', type: 'text', placeholder: '输入要添加的姓名' }),
+	            ' ',
+	            _react2.default.createElement('input', { type: 'button', value: '添加',
+	                onClick: this.add })
+	        );
+	    }
+	});
+
+	var Home = function (_React$Component) {
+	    _inherits(Home, _React$Component);
+
+	    function Home() {
+	        _classCallCheck(this, Home);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Home).apply(this, arguments));
+	    }
+
+	    _createClass(Home, [{
+	        key: 'hasLogin',
+	        value: function hasLogin() {
+	            return localStorage.getItem("login") === 'true';
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return this.hasLogin() ? _react2.default.createElement(
+	                'div',
+	                null,
+	                'hello world!!! ',
+	                this.props.params.name,
+	                ' 的主页   ',
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/lgOut' },
+	                    '点击我退出'
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(ItemNotic, { data: testData }),
+	                _react2.default.createElement(AddItem, { data: testData }),
+	                _react2.default.createElement(
+	                    'table',
+	                    null,
+	                    _react2.default.createElement(
+	                        'thead',
+	                        null,
+	                        _react2.default.createElement(
+	                            'tr',
+	                            null,
+	                            _react2.default.createElement(
+	                                'td',
+	                                null,
+	                                '序号'
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                null,
+	                                '姓名'
+	                            ),
+	                            _react2.default.createElement(
+	                                'td',
+	                                null,
+	                                '操作'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(ItemList, { data: testData })
+	                )
+	            ) : _react2.default.createElement(
+	                'div',
+	                null,
+	                '您没有登录,需要重新进行登录才行!!!',
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/login' },
+	                    '点击我跳到登录页'
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Home;
+	}(_react2.default.Component);
+
+	exports.default = Home;
+
+/***/ },
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22979,16 +23197,29 @@ webpackJsonp([0],[
 	exports.default = lgOut;
 
 /***/ },
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _redux = __webpack_require__(239);
+
+	var _itemReducer = __webpack_require__(252);
+
+	var _itemReducer2 = _interopRequireDefault(_itemReducer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var itemStore = (0, _redux.createStore)(_itemReducer2.default);
+
+	exports.default = itemStore;
+
+/***/ },
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -22996,27 +23227,27 @@ webpackJsonp([0],[
 	exports.__esModule = true;
 	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
 
-	var _createStore = __webpack_require__(248);
+	var _createStore = __webpack_require__(240);
 
 	var _createStore2 = _interopRequireDefault(_createStore);
 
-	var _combineReducers = __webpack_require__(255);
+	var _combineReducers = __webpack_require__(247);
 
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 
-	var _bindActionCreators = __webpack_require__(257);
+	var _bindActionCreators = __webpack_require__(249);
 
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 
-	var _applyMiddleware = __webpack_require__(258);
+	var _applyMiddleware = __webpack_require__(250);
 
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 
-	var _compose = __webpack_require__(259);
+	var _compose = __webpack_require__(251);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
-	var _warning = __webpack_require__(256);
+	var _warning = __webpack_require__(248);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -23040,7 +23271,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 248 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23049,11 +23280,11 @@ webpackJsonp([0],[
 	exports.ActionTypes = undefined;
 	exports["default"] = createStore;
 
-	var _isPlainObject = __webpack_require__(249);
+	var _isPlainObject = __webpack_require__(241);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _symbolObservable = __webpack_require__(253);
+	var _symbolObservable = __webpack_require__(245);
 
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 
@@ -23307,12 +23538,12 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 249 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var getPrototype = __webpack_require__(250),
-	    isHostObject = __webpack_require__(251),
-	    isObjectLike = __webpack_require__(252);
+	var getPrototype = __webpack_require__(242),
+	    isHostObject = __webpack_require__(243),
+	    isObjectLike = __webpack_require__(244);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -23383,7 +23614,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 250 */
+/* 242 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -23404,7 +23635,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 251 */
+/* 243 */
 /***/ function(module, exports) {
 
 	/**
@@ -23430,7 +23661,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 252 */
+/* 244 */
 /***/ function(module, exports) {
 
 	/**
@@ -23465,18 +23696,18 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 253 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 
-	module.exports = __webpack_require__(254)(global || window || this);
+	module.exports = __webpack_require__(246)(global || window || this);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 254 */
+/* 246 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23501,7 +23732,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 255 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -23509,13 +23740,13 @@ webpackJsonp([0],[
 	exports.__esModule = true;
 	exports["default"] = combineReducers;
 
-	var _createStore = __webpack_require__(248);
+	var _createStore = __webpack_require__(240);
 
-	var _isPlainObject = __webpack_require__(249);
+	var _isPlainObject = __webpack_require__(241);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _warning = __webpack_require__(256);
+	var _warning = __webpack_require__(248);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
@@ -23634,7 +23865,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 256 */
+/* 248 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23664,7 +23895,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 257 */
+/* 249 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23720,7 +23951,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 258 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23731,7 +23962,7 @@ webpackJsonp([0],[
 
 	exports["default"] = applyMiddleware;
 
-	var _compose = __webpack_require__(259);
+	var _compose = __webpack_require__(251);
 
 	var _compose2 = _interopRequireDefault(_compose);
 
@@ -23783,7 +24014,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 259 */
+/* 251 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23828,52 +24059,14 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 260 */,
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
+/* 252 */
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(172);
-
-	var _redux = __webpack_require__(247);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var testData = [{ id: 1, name: "a" }, { id: 2, name: "b" }, { id: 3, name: "c" }];
-
-	// action creator
-	var actions = {
-	    delete: function _delete(item) {
-	        return {
-	            type: 'del_item',
-	            id: item.id
-	        };
-	    },
-	    add: function add(item) {
-	        return {
-	            type: 'add_item',
-	            name: item.name
-	        };
-	    }
-	};
-
 	// reducers
 	var itemReducer = function itemReducer(state, action) {
 	    if (typeof state === 'undefined') {
@@ -23894,185 +24087,32 @@ webpackJsonp([0],[
 	            return state;
 	    }
 	};
+	exports.default = itemReducer;
 
-	var store = (0, _redux.createStore)(itemReducer);
+/***/ },
+/* 253 */
+/***/ function(module, exports) {
 
-	var Item = _react2.default.createClass({
-	    displayName: 'Item',
-	    click: function click() {
-	        store.dispatch(actions.delete({ id: this.props.id }));
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'tr',
-	            { key: this.props.id },
-	            _react2.default.createElement(
-	                'td',
-	                null,
-	                this.props.id
-	            ),
-	            _react2.default.createElement(
-	                'td',
-	                null,
-	                this.props.name
-	            ),
-	            _react2.default.createElement(
-	                'td',
-	                null,
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: this.click },
-	                    '删除'
-	                )
-	            )
-	        );
-	    }
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
 	});
-
-	var ItemList = _react2.default.createClass({
-	    displayName: 'ItemList',
-	    getInitialState: function getInitialState() {
+	var actions = {
+	    delete: function _delete(item) {
 	        return {
-	            list: store.getState()
+	            type: 'del_item',
+	            id: item.id
 	        };
 	    },
-	    componentDidMount: function componentDidMount() {
-	        var unsubscribe = store.subscribe(this.onChange);
-	    },
-	    onChange: function onChange() {
-	        this.setState({ list: store.getState() });
-	    },
-	    render: function render() {
-	        var _this = this;
-
-	        return _react2.default.createElement(
-	            'tbody',
-	            null,
-	            this.state.list.map(function (item, index) {
-	                return _react2.default.createElement(Item, { name: item.name, id: index, key: index, list: _this.state.list });
-	            })
-	        );
-	    }
-	});
-
-	var ItemNotic = _react2.default.createClass({
-	    displayName: 'ItemNotic',
-	    getInitialState: function getInitialState() {
-	        return { list: store.getState().length };
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'h4',
-	            null,
-	            '当前选择的数量为:',
-	            _react2.default.createElement(
-	                'span',
-	                null,
-	                this.state.list.length
-	            )
-	        );
-	    }
-	});
-
-	var AddItem = _react2.default.createClass({
-	    displayName: 'AddItem',
-	    getInitialState: function getInitialState() {
+	    add: function add(item) {
 	        return {
-	            list: store.getState()
+	            type: 'add_item',
+	            name: item.name
 	        };
-	    },
-	    add: function add() {
-	        store.dispatch(actions.add({ name: this.refs.input.value }));
-	    },
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement('input', { ref: 'input', type: 'text', placeholder: '输入要添加的姓名' }),
-	            ' ',
-	            _react2.default.createElement('input', { type: 'button', value: '添加',
-	                onClick: this.add })
-	        );
 	    }
-	});
-
-	var Home = function (_React$Component) {
-	    _inherits(Home, _React$Component);
-
-	    function Home() {
-	        _classCallCheck(this, Home);
-
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Home).apply(this, arguments));
-	    }
-
-	    _createClass(Home, [{
-	        key: 'hasLogin',
-	        value: function hasLogin() {
-	            return localStorage.getItem("login") === 'true';
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return this.hasLogin() ? _react2.default.createElement(
-	                'div',
-	                null,
-	                'hello world!!! ',
-	                this.props.params.name,
-	                ' 的主页   ',
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/lgOut' },
-	                    '点击我退出'
-	                ),
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement(ItemNotic, { data: testData }),
-	                _react2.default.createElement(AddItem, { data: testData }),
-	                _react2.default.createElement(
-	                    'table',
-	                    null,
-	                    _react2.default.createElement(
-	                        'thead',
-	                        null,
-	                        _react2.default.createElement(
-	                            'tr',
-	                            null,
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '序号'
-	                            ),
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '姓名'
-	                            ),
-	                            _react2.default.createElement(
-	                                'td',
-	                                null,
-	                                '操作'
-	                            )
-	                        )
-	                    ),
-	                    _react2.default.createElement(ItemList, { data: testData })
-	                )
-	            ) : _react2.default.createElement(
-	                'div',
-	                null,
-	                '您没有登录,需要重新进行登录才行!!!',
-	                _react2.default.createElement('br', null),
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/login' },
-	                    '点击我跳到登录页'
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Home;
-	}(_react2.default.Component);
-
-	exports.default = Home;
+	};
+	exports.default = actions;
 
 /***/ }
 ]);
