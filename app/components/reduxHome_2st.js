@@ -1,14 +1,16 @@
-import React from 'react';
-import {Link} from 'react-router';
-import {connect} from 'react-redux';
-import * as ItemsActions from '../actions';
-import {bindActionCreators} from 'redux';
+import React from "react";
+import {Link} from "react-router";
+import {connect} from "react-redux";
+import * as ItemsActions from "../actions";
+import {bindActionCreators} from "redux";
+import ImmutableRenderMixin from "react-immutable-render-mixin";
+
 
 let testData = [{id: 1, name: "a"}, {id: 2, name: "b"}, {id: 3, name: "c"}];
 
 let Item = React.createClass({
-    click(){
-        ItemStore.dispatch(itemAction.delete({id: this.props.id}))
+    delete(){
+        this.props.deleteItem(this.props)
     },
     render(){
         return (
@@ -16,7 +18,7 @@ let Item = React.createClass({
                 <td>{this.props.id}</td>
                 <td>{this.props.name}</td>
                 <td>
-                    <button onClick={this.click}>删除
+                    <button onClick={this.delete}>删除
                     </button>
                 </td>
             </tr>
@@ -25,22 +27,12 @@ let Item = React.createClass({
 })
 
 let ItemList = React.createClass({
-    getInitialState(){
-        return {
-            list: ItemStore.getState()
-        }
-    },
-    componentDidMount(){
-        var unsubscribe = ItemStore.subscribe(this.onChange);
-    },
-    onChange(){
-        this.setState({list: ItemStore.getState()})
-    },
     render(){
         return (
             <tbody>
-            {this.state.list.map((item, index)=>(
-                <Item name={item.name} id={index} key={index} list={this.state.list}></Item>
+            {this.props.items.map((item, index)=>(
+                <Item name={item.name} id={index} key={index} list={this.props.items}
+                      deleteItem={this.props.deleteItem}></Item>
             ))}
             </tbody>
         )
@@ -48,18 +40,9 @@ let ItemList = React.createClass({
 })
 
 let ItemNotic = React.createClass({
-    getInitialState(){
-        return {list: ItemStore.getState()}
-    },
-    componentDidMount(){
-        var unsubscribe = ItemStore.subscribe(this.onChange)
-    },
-    onChange(){
-        this.setState({list: ItemStore.getState()})
-    },
     render(){
         return (
-            <h4>当前选择的数量为:<span>{this.state.list.length}</span></h4>
+            <h4>当前所有一共的数量为:<span>{this.props.items.size}</span></h4>
         )
     }
 })
@@ -67,35 +50,40 @@ let ItemNotic = React.createClass({
 let AddItem = React.createClass({
     getInitialState(){
         return {
-            list: ItemStore.getState()
+            list: this.props.items
         }
     },
     add(){
-        ItemStore.dispatch(itemAction.add({name: this.refs.input.value}));
+        this.props.addItem({name: this.refs.input.value});
     },
     render(){
         return (
             <div>
-                <input ref="input" type="text" placeholder="输入要添加的姓名"/>&nbsp;<input type="button" value="添加"
-                                                                                    onClick={this.add}/>
+                <input ref="input" type="text" placeholder="输入要添加的姓名"/>&nbsp;
+                <input type="button" value="添加" onClick={this.add}/>
             </div>
         )
     }
 })
 
 let Home = React.createClass({
+    mixins: [ImmutableRenderMixin],
     hasLogin() {
         return localStorage.getItem("login") === 'true';
     },
+    propTypes: {
+        items: React.PropTypes.object
+    },
     render() {
         const actions = this.props.actions;
+        console.log(this.props.items)
         return this.hasLogin() ?
             (
                 <div>
                     hello world!!! {this.props.params.name} 的主页
                     &nbsp;&nbsp;<Link to="/lgOut">点击我退出</Link><br/>
-                    <ItemNotic data={testData}></ItemNotic>
-                    <AddItem data={testData} addItem={actions.addItem}/>
+                    <ItemNotic items={this.props.items}></ItemNotic>
+                    <AddItem items={this.props.items} addItem={actions.addItem}/>
                     <table>
                         <thead>
                         <tr>
@@ -104,7 +92,7 @@ let Home = React.createClass({
                             <td>操作</td>
                         </tr>
                         </thead>
-                        <ItemList data={testData} delete={actions.deleteItem}/>
+                        <ItemList items={this.props.items} deleteItem={actions.deleteItem}/>
                     </table>
                 </div>
             ) :
@@ -116,11 +104,11 @@ let Home = React.createClass({
             )
     }
 })
-
+//
 export default connect(state=>({
-    items:state.items
-}),dispatch=>({
-    actions:bindActionCreators(ItemsActions,dispatch)
+    items: state.items
+}), dispatch=>({
+    actions: bindActionCreators(ItemsActions, dispatch)
 }))(Home)
 
 

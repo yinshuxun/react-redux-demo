@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router';
+import React from "react";
+import {Link} from "react-router";
 
 let testData = [{id: 1, name: "a"}, {id: 2, name: "b"}, {id: 3, name: "c"}];
 

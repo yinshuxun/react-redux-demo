@@ -1,5 +1,5 @@
-import React from 'react';
-import {Link} from 'react-router'
+import React from "react";
+import {Link} from "react-router";
 
 let Input = React.createClass({
     render(){
@@ -31,15 +31,12 @@ let From = React.createClass({
     contextTypes: {
         router: React.PropTypes.object
     },
-    componentWillMount(){
-        this.setState({username: "xsy"})
-    },
     render(){
         return this.hasLogin() ? (
             <span>您已经登录!!<Link to="/lgOut">退出</Link></span>
         ):(
             <form onSubmit={this.submitForm}>
-                <div>大家好,我是作者{this.state.username}!!</div>
+                <div>登录</div>
                 <Input type="username" placeholder="username"/>
                 <Input type="password" hasBt="true" placeholder="pwd"/>
                 <button type="submit">点击我登录</button>

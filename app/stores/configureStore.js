@@ -2,7 +2,7 @@ import thunk from "redux-thunk";
 import createLogger from "redux-logger";
 import {createStore, applyMiddleware, compose} from "redux";
 import DevTools from "../DevTools";
-import itemReducer from "../reducers"; // redux-thunk 支持 dispatch function，并且可以异步调用它
+import itemReducers from "../reducers"; // redux-thunk 支持 dispatch function，并且可以异步调用它
 // 利用redux-logger打印日志
 // 引入redux createStore、中间件及compose
 // 引入DevTools调试组件
@@ -19,6 +19,11 @@ const finalCreateStore = compose(
     DevTools.instrument()
 )(createStore)
 
-const itemStore = finalCreateStore(itemReducer);
+const itemStore = finalCreateStore(itemReducers);
 
-export default  itemStore;
+export default itemStore;
+
+// export default function configureStore(initialState) {
+//     const store = finalCreateStore(itemReducers, initialState);
+//     return store;
+// };
