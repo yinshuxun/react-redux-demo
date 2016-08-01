@@ -2,7 +2,7 @@ webpackJsonp([0],[
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var _react = __webpack_require__(1);
 
@@ -15,10 +15,6 @@ webpackJsonp([0],[
 	var _reactRedux = __webpack_require__(172);
 
 	var _reactRouter = __webpack_require__(194);
-
-	var _DevTools = __webpack_require__(255);
-
-	var _DevTools2 = _interopRequireDefault(_DevTools);
 
 	var _routes = __webpack_require__(596);
 
@@ -34,7 +30,7 @@ webpackJsonp([0],[
 	    _reactRedux.Provider,
 	    { store: _configureStore2.default },
 	    _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
 	        _react2.default.createElement(_reactRouter.Router, { history: _reactRouter.hashHistory, router: _reactRouter.Route, routes: _routes2.default })
 	    )
@@ -24246,7 +24242,7 @@ webpackJsonp([0],[
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -24271,8 +24267,8 @@ webpackJsonp([0],[
 	// 调试工具
 	var DevTools = (0, _reduxDevtools.createDevTools)(_react2.default.createElement(
 	    _reduxDevtoolsDockMonitor2.default,
-	    { toggleVisibilityKey: 'ctrl-h', changePositionKey: 'ctrl-q' },
-	    _react2.default.createElement(_reduxDevtoolsLogMonitor2.default, { theme: 'tomorrow', preserveScrollTop: false })
+	    { toggleVisibilityKey: "ctrl-h", changePositionKey: "ctrl-q" },
+	    _react2.default.createElement(_reduxDevtoolsLogMonitor2.default, { theme: "tomorrow", preserveScrollTop: false })
 	));
 
 	exports.default = DevTools;
@@ -36927,7 +36923,7 @@ webpackJsonp([0],[
 /* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -36959,18 +36955,18 @@ webpackJsonp([0],[
 
 	exports.default = _react2.default.createElement(
 	    _reactRouter.Route,
-	    { path: '/', component: _app2.default },
+	    { path: "/", component: _app2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _form2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _form2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/home(/:name)(/:pwd)', component: _reduxHome_2st2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/lgOut', component: _lgOut2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: "/login", component: _form2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: "/home(/:name)(/:pwd)", component: _reduxHome_2st2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: "/lgOut", component: _lgOut2.default })
 	);
 
 /***/ },
 /* 597 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -36985,20 +36981,20 @@ webpackJsonp([0],[
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var From = _react2.default.createClass({
-	    displayName: 'From',
+	    displayName: "From",
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
 	            _react2.default.createElement(
-	                'h1',
+	                "h1",
 	                null,
-	                '这是一个简单的react+redux的主页!!'
+	                "这是一个简单的react+redux的主页!!"
 	            ),
-	            _react2.default.createElement('br', null),
-	            _react2.default.createElement('br', null),
+	            _react2.default.createElement("br", null),
+	            _react2.default.createElement("br", null),
 	            _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
 	                this.props.children
 	            )
@@ -37012,7 +37008,7 @@ webpackJsonp([0],[
 /* 598 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -37027,18 +37023,18 @@ webpackJsonp([0],[
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Input = _react2.default.createClass({
-	    displayName: 'Input',
+	    displayName: "Input",
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
-	            _react2.default.createElement('input', { type: this.props.type, ref: 'inp' })
+	            _react2.default.createElement("input", { type: this.props.type, ref: "inp" })
 	        );
 	    }
 	});
 
 	var From = _react2.default.createClass({
-	    displayName: 'From',
+	    displayName: "From",
 	    getInitialState: function getInitialState() {
 	        return {
 	            username: "ysx"
@@ -37047,7 +37043,7 @@ webpackJsonp([0],[
 	    submitForm: function submitForm(event) {
 	        var name = event.target.elements[0].value,
 	            pwd = event.target.elements[1].value,
-	            path = '/home/' + name + '/' + pwd;
+	            path = "/home/" + name + "/" + pwd;
 	        if ("123" !== pwd) {
 	            return;
 	        }
@@ -37063,35 +37059,35 @@ webpackJsonp([0],[
 	    },
 	    render: function render() {
 	        return this.hasLogin() ? _react2.default.createElement(
-	            'span',
+	            "span",
 	            null,
-	            '您已经登录!!',
+	            "您已经登录!!",
 	            _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/lgOut' },
-	                '退出'
+	                { to: "/lgOut" },
+	                "退出"
 	            )
 	        ) : _react2.default.createElement(
-	            'form',
+	            "form",
 	            { onSubmit: this.submitForm },
 	            _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
-	                '登录'
+	                "登录"
 	            ),
-	            _react2.default.createElement(Input, { type: 'username', placeholder: 'username' }),
-	            _react2.default.createElement(Input, { type: 'password', hasBt: 'true', placeholder: 'pwd' }),
+	            _react2.default.createElement(Input, { type: "username", placeholder: "username" }),
+	            _react2.default.createElement(Input, { type: "password", hasBt: "true", placeholder: "pwd" }),
 	            _react2.default.createElement(
-	                'button',
-	                { type: 'submit' },
-	                '点击我登录'
+	                "button",
+	                { type: "submit" },
+	                "点击我登录"
 	            ),
 	            _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/home' },
-	                '进入主页'
+	                { to: "/home" },
+	                "进入主页"
 	            ),
-	            _react2.default.createElement('br', null)
+	            _react2.default.createElement("br", null)
 	        );
 	    }
 	});
@@ -37102,7 +37098,7 @@ webpackJsonp([0],[
 /* 599 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -37133,31 +37129,31 @@ webpackJsonp([0],[
 	var testData = [{ id: 1, name: "a" }, { id: 2, name: "b" }, { id: 3, name: "c" }];
 
 	var Item = _react2.default.createClass({
-	    displayName: 'Item',
+	    displayName: "Item",
 	    delete: function _delete() {
 	        this.props.deleteItem(this.props);
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'tr',
+	            "tr",
 	            { key: this.props.id },
 	            _react2.default.createElement(
-	                'td',
+	                "td",
 	                null,
 	                this.props.id
 	            ),
 	            _react2.default.createElement(
-	                'td',
+	                "td",
 	                null,
 	                this.props.name
 	            ),
 	            _react2.default.createElement(
-	                'td',
+	                "td",
 	                null,
 	                _react2.default.createElement(
-	                    'button',
+	                    "button",
 	                    { onClick: this.delete },
-	                    '删除'
+	                    "删除"
 	                )
 	            )
 	        );
@@ -37165,12 +37161,12 @@ webpackJsonp([0],[
 	});
 
 	var ItemList = _react2.default.createClass({
-	    displayName: 'ItemList',
+	    displayName: "ItemList",
 	    render: function render() {
 	        var _this = this;
 
 	        return _react2.default.createElement(
-	            'tbody',
+	            "tbody",
 	            null,
 	            this.props.items.map(function (item, index) {
 	                return _react2.default.createElement(Item, { name: item.name, id: index, key: index, list: _this.props.items,
@@ -37181,14 +37177,14 @@ webpackJsonp([0],[
 	});
 
 	var ItemNotic = _react2.default.createClass({
-	    displayName: 'ItemNotic',
+	    displayName: "ItemNotic",
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'h4',
+	            "h4",
 	            null,
-	            '当前所有一共的数量为:',
+	            "当前所有一共的数量为:",
 	            _react2.default.createElement(
-	                'span',
+	                "span",
 	                null,
 	                this.props.items.size
 	            )
@@ -37197,7 +37193,7 @@ webpackJsonp([0],[
 	});
 
 	var AddItem = _react2.default.createClass({
-	    displayName: 'AddItem',
+	    displayName: "AddItem",
 	    getInitialState: function getInitialState() {
 	        return {
 	            list: this.props.items
@@ -37208,17 +37204,17 @@ webpackJsonp([0],[
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
-	            _react2.default.createElement('input', { ref: 'input', type: 'text', placeholder: '输入要添加的姓名' }),
-	            ' ',
-	            _react2.default.createElement('input', { type: 'button', value: '添加', onClick: this.add })
+	            _react2.default.createElement("input", { ref: "input", type: "text", placeholder: "输入要添加的姓名" }),
+	            " ",
+	            _react2.default.createElement("input", { type: "button", value: "添加", onClick: this.add })
 	        );
 	    }
 	});
 
 	var Home = _react2.default.createClass({
-	    displayName: 'Home',
+	    displayName: "Home",
 
 	    mixins: [_reactImmutableRenderMixin2.default],
 	    hasLogin: function hasLogin() {
@@ -37232,56 +37228,56 @@ webpackJsonp([0],[
 	        var actions = this.props.actions;
 	        console.log(this.props.items);
 	        return this.hasLogin() ? _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
-	            'hello world!!! ',
+	            "hello world!!! ",
 	            this.props.params.name,
-	            ' 的主页   ',
+	            " 的主页   ",
 	            _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/lgOut' },
-	                '点击我退出'
+	                { to: "/lgOut" },
+	                "点击我退出"
 	            ),
-	            _react2.default.createElement('br', null),
+	            _react2.default.createElement("br", null),
 	            _react2.default.createElement(ItemNotic, { items: this.props.items }),
 	            _react2.default.createElement(AddItem, { items: this.props.items, addItem: actions.addItem }),
 	            _react2.default.createElement(
-	                'table',
+	                "table",
 	                null,
 	                _react2.default.createElement(
-	                    'thead',
+	                    "thead",
 	                    null,
 	                    _react2.default.createElement(
-	                        'tr',
+	                        "tr",
 	                        null,
 	                        _react2.default.createElement(
-	                            'td',
+	                            "td",
 	                            null,
-	                            '序号'
+	                            "序号"
 	                        ),
 	                        _react2.default.createElement(
-	                            'td',
+	                            "td",
 	                            null,
-	                            '姓名'
+	                            "姓名"
 	                        ),
 	                        _react2.default.createElement(
-	                            'td',
+	                            "td",
 	                            null,
-	                            '操作'
+	                            "操作"
 	                        )
 	                    )
 	                ),
 	                _react2.default.createElement(ItemList, { items: this.props.items, deleteItem: actions.deleteItem })
 	            )
 	        ) : _react2.default.createElement(
-	            'div',
+	            "div",
 	            null,
-	            '您没有登录,需要重新进行登录才行!!!',
-	            _react2.default.createElement('br', null),
+	            "您没有登录,需要重新进行登录才行!!!",
+	            _react2.default.createElement("br", null),
 	            _react2.default.createElement(
 	                _reactRouter.Link,
-	                { to: '/login' },
-	                '点击我跳到登录页'
+	                { to: "/login" },
+	                "点击我跳到登录页"
 	            )
 	        );
 	    }
@@ -37301,7 +37297,7 @@ webpackJsonp([0],[
 /* 600 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -37336,21 +37332,13 @@ webpackJsonp([0],[
 
 /***/ },
 /* 601 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.DELETE_ITEM = exports.ADD_ITEM = undefined;
-
-	var _keyMirror = __webpack_require__(22);
-
-	var _keyMirror2 = _interopRequireDefault(_keyMirror);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 	// export default keyMirror({
 	//     ADD_ITEM: null,
 	//     DELETE_ITEM: null
@@ -42596,7 +42584,7 @@ webpackJsonp([0],[
 /* 609 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -42622,14 +42610,15 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// 调用日志打印方法
-	// 引入redux createStore、中间件及compose
 	// redux-thunk 支持 dispatch function，并且可以异步调用它
+	// 利用redux-logger打印日志
+	// 引入redux createStore、中间件及compose
+	// 引入DevTools调试组件
+
+	// 调用日志打印方法
 	var loggerMiddleware = (0, _reduxLogger2.default)();
 
 	// 创建一个中间件集合
-	// 引入DevTools调试组件
-	// 利用redux-logger打印日志
 	var middleware = [_reduxThunk2.default, loggerMiddleware];
 
 	// 利用compose增强store，这个 store 与 applyMiddleware 和 redux-devtools 一起使用
@@ -42909,7 +42898,7 @@ webpackJsonp([0],[
 /* 612 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -42948,7 +42937,7 @@ webpackJsonp([0],[
 /* 613 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
