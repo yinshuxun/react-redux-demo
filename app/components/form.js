@@ -4,7 +4,8 @@ import {Link} from "react-router";
 let Input = React.createClass({
     render(){
         return <div>
-            <input type={this.props.type} ref="inp"/>
+            <label for="">{this.props.type}</label>
+            <input className="form-control" style={{maxWidth:200,margin:'auto'}} type={this.props.type} ref="inp"/>
         </div>
     }
 })
@@ -39,7 +40,8 @@ let From = React.createClass({
                 <div>登录</div>
                 <Input type="username" placeholder="username"/>
                 <Input type="password" hasBt="true" placeholder="pwd"/>
-                <button type="submit">点击我登录</button>
+                <p/>
+                <button className="btn btn-default" type="submit">点击我登录</button>&nbsp;&nbsp;
                 <Link to="/home">进入主页</Link><br></br>
             </form>
         )

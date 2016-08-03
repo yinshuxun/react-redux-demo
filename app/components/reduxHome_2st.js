@@ -18,8 +18,7 @@ let Item = React.createClass({
                 <td>{this.props.id}</td>
                 <td>{this.props.name}</td>
                 <td>
-                    <button onClick={this.delete}>删除
-                    </button>
+                    <button className="btn btn-default" onClick={this.delete}>删除</button>
                 </td>
             </tr>
         )
@@ -58,9 +57,9 @@ let AddItem = React.createClass({
     },
     render(){
         return (
-            <div>
-                <input ref="input" type="text" placeholder="输入要添加的姓名"/>&nbsp;
-                <input type="button" value="添加" onClick={this.add}/>
+            <div className="form-inline">
+                <input ref="input" className="form-control" type="text" placeholder="输入要添加的姓名"/>&nbsp;
+                <button className="btn btn-primary" value="添加" onClick={this.add} >添加</button>
             </div>
         )
     }
@@ -76,15 +75,14 @@ let Home = React.createClass({
     },
     render() {
         const actions = this.props.actions;
-        console.log(this.props.items)
         return this.hasLogin() ?
             (
                 <div>
                     hello world!!! {this.props.params.name} 的主页
                     &nbsp;&nbsp;<Link to="/lgOut">点击我退出</Link><br/>
                     <ItemNotic items={this.props.items}></ItemNotic>
-                    <AddItem items={this.props.items} addItem={actions.addItem}/>
-                    <table>
+                    <AddItem items={this.props.items} addItem={actions.addItem}/><br/>
+                    <table className="table table-striped table-hover table-condensed" style={{maxWidth:300}}>
                         <thead>
                         <tr>
                             <td>序号</td>

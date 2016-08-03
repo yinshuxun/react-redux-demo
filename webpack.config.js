@@ -17,13 +17,27 @@ module.exports = {
     },
     module: {
         //加载器配置
-        loaders: [{
-            test: /\.js?$/,
-            exclude: /node_modules/,
-            loader: 'babel',
-            query: {
-                presets: ['react', 'es2015']
+        loaders: [
+            {
+                test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+                loader: 'url-loader?limit=50000&name=[path][name].[ext]'
+            },
+            {
+                test: /\.js?$/,
+                exclude: /node_modules/,
+                loader: 'babel',
+                query: {
+                    presets: ['react', 'es2015']
+                }
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            },
+            {
+                test: /\.scss$/,
+                loader: 'style!css!sass'
             }
-        }]
+        ]
     }
 }
