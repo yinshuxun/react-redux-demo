@@ -1,10 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
-const optimizePlug = new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js');
+
+const BUILD_PATH = path.join(__dirname, 'app');
+const OUT_PATH = path.join(__dirname, 'dist')
+
+console.log(BUILD_PATH, OUT_PATH);
 
 module.exports = {
     //出入项
-    plugins: [optimizePlug],
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+    ],
     //页面入口文件配置
     entry: {
         app: path.join(__dirname, 'app'),
