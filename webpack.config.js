@@ -4,17 +4,30 @@ const path = require('path');
 const BUILD_PATH = path.join(__dirname, 'app');
 const OUT_PATH = path.join(__dirname, 'dist')
 
-console.log(BUILD_PATH, OUT_PATH);
+var isProduction = function () {
+    return process.env.NODE_ENV === 'production';
+};
+
+var plugins = [
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    //提供入口,每个文件自动require以下依赖
+    new webpack.ProvidePlugin({
+        React: 'react',
+        ReactDOM: 'react-dom',
+        reqwest: 'reqwest'
+    })
+]
+
+if (isProduction()) {
+    plugins.push(
+        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}})
+    )
+}
 
 module.exports = {
+    devtool: 'source-map',
     //出入项
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-        new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-        }),
-    ],
+    plugins: plugins,
     //页面入口文件配置
     entry: {
         app: path.join(__dirname, 'app'),
@@ -22,7 +35,7 @@ module.exports = {
     },
     //入口文件输出配置
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'dist' + (isProduction() ? "_production" : "")),
         filename: '[name].js'
     },
     module: {
