@@ -25059,21 +25059,21 @@ webpackJsonp([0],[
 	
 	var _actionTypes = __webpack_require__(271);
 	
-	// export function addItem(item) {
-	//     return dispatch=> {
-	//         //模拟异步请求
-	//         setTimeout(()=> {
-	//             dispatch({type: ADD_ITEM, id: item.id})
-	//         }, 1000)
-	//     }
-	// }
-	
 	function addItem(item) {
-	    return {
-	        type: _actionTypes.ADD_ITEM,
-	        name: item.name
+	    return function (dispatch) {
+	        //模拟异步请求
+	        setTimeout(function () {
+	            dispatch({ type: _actionTypes.ADD_ITEM, name: item.name });
+	        }, 1000);
 	    };
 	}
+	
+	// export function addItem(item) {
+	//     return {
+	//         type: ADD_ITEM,
+	//         name: item.name
+	//     }
+	// }
 	
 	function deleteItem(item) {
 	    return {
@@ -43385,7 +43385,7 @@ webpackJsonp([0],[
 	                completed: false
 	            });
 	        case _actionTypes.DELETE_ITEM:
-	            return state.splice(action.id, 1);;
+	            return state.splice(action.id, 1);
 	        default:
 	            return state;
 	    }

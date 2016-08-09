@@ -12,7 +12,7 @@ export default function items(state = initialItems,action){
                 completed: false
             });
         case DELETE_ITEM:
-            return state.splice(action.id, 1);;
+            return state.splice(action.id, 1);
         default:
             return state;
     }
