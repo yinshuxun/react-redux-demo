@@ -1,3 +1,3 @@
-# react-redux-demo caes
+# react-redux-demo
 
   [demo](https://yinshuxun.github.io/)
