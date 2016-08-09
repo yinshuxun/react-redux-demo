@@ -12,13 +12,17 @@ let Item = React.createClass({
     delete(){
         this.props.deleteItem(this.props)
     },
+    href(){
+        this.props.url && window.open(this.props.url)
+    },
     render(){
         return (
             <tr key={this.props.id}>
-                <td>{this.props.id}</td>
-                <td>{this.props.name}</td>
+                <td>{this.props.id ? this.props.id : ""}</td>
+                <td>{this.props.name}:{this.props.url ?
+                    <a href="javascript:;" onClick={this.href}>{this.props.url}</a> : ""}</td>
                 <td>
-                    <button className="btn btn-default" onClick={this.delete}>删除</button>
+                    {this.props.id ? <button className="btn btn-default" onClick={this.delete}>删除</button> : ""}
                 </td>
             </tr>
         )
@@ -26,11 +30,15 @@ let Item = React.createClass({
 })
 
 let ItemList = React.createClass({
+    componentDidMount(){
+        this.props.getItems();
+    },
     render(){
         return (
             <tbody>
             {this.props.items.map((item, index)=>(
-                <Item name={item.name} id={index} key={index} list={this.props.items}
+                <Item url={item.url} name={item.name} id={item.id === 0 ? 0 : index+1} key={index+1}
+                      list={this.props.items}
                       deleteItem={this.props.deleteItem}></Item>
             ))}
             </tbody>
@@ -59,7 +67,7 @@ let AddItem = React.createClass({
         return (
             <div className="form-inline">
                 <input ref="input" className="form-control" type="text" placeholder="输入要添加的姓名"/>&nbsp;
-                <button className="btn btn-primary" value="添加" onClick={this.add} >添加</button>
+                <button className="btn btn-primary" value="添加" onClick={this.add}>添加</button>
             </div>
         )
     }
@@ -78,7 +86,7 @@ let Home = React.createClass({
         return this.hasLogin() ?
             (
                 <div>
-                    hello world!!! {this.props.params.name} 的主页
+                    当前是 {this.props.params.name} 的主页!
                     &nbsp;&nbsp;<Link to="/lgOut">点击我退出</Link><br/>
                     <ItemNotic items={this.props.items}></ItemNotic>
                     <AddItem items={this.props.items} addItem={actions.addItem}/><br/>
@@ -90,7 +98,7 @@ let Home = React.createClass({
                             <td>操作</td>
                         </tr>
                         </thead>
-                        <ItemList items={this.props.items} deleteItem={actions.deleteItem}/>
+                        <ItemList items={this.props.items} getItems={actions.getItems} deleteItem={actions.deleteItem}/>
                     </table>
                 </div>
             ) :

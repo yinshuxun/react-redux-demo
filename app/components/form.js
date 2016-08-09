@@ -19,9 +19,9 @@ let From = React.createClass({
     submitForm(event){
         const name = this.refs.form.elements[0].value,
             pwd = this.refs.form.elements[1].value,
-            path = `/home/${name}/${pwd}`;
+            path = `/home/${name ? name : null}/${pwd}`;
         if ("123" !== pwd) {
-            return;
+            // return;
         }
         localStorage.setItem("login", true);
         this.context.router.push(path);
@@ -35,13 +35,14 @@ let From = React.createClass({
     render(){
         return this.hasLogin() ? (
             <span>您已经登录!!<Link to="/lgOut">退出</Link></span>
-        ):(
+        ) : (
             <form ref="form">
                 <div>登录</div>
                 <Input type="username" placeholder="username"/>
                 <Input type="password" hasBt="true" placeholder="pwd"/>
                 <p/>
-                <div className="btn btn-default" onClick={this.submitForm}>点击我登录</div>&nbsp;&nbsp;
+                <div className="btn btn-default" onClick={this.submitForm}>点击我登录</div>
+                &nbsp;&nbsp;
                 <Link to="/home">进入主页</Link><br></br>
             </form>
         )
