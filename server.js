@@ -5,7 +5,7 @@ const child_process = require("child_process")
 const app = express(),
     port = 3000;
 
-// app.use(express.static(path.join(__dirname,"/dist")))
+// ceshi app.use(express.static(path.join(__dirname,"/dist")))
 
 app.use("/dist/app.js", function (req, res) {
     res.sendFile(path.join(__dirname, "/dist/app.js"));
